@@ -19,9 +19,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
 
 public class MenuActivity extends Activity
 {
@@ -46,10 +43,7 @@ public class MenuActivity extends Activity
 		this.setVolumeControlStream(AudioManager.STREAM_MUSIC);  
 		
 		LL = (LinearLayout)findViewById(R.id.LL);
-		AdView adView = new AdView(this, AdSize.BANNER, "a14dfecd0f95a2a");
-		LL.addView(adView);
-		adView.setGravity(Gravity.BOTTOM);
-		adView.loadAd(new AdRequest());
+		
 		Go = (Button) findViewById(R.id.go);
 		spinner = (Spinner) findViewById(R.id.spinner);
 		numbut = (TextView) findViewById(R.id.numbut);

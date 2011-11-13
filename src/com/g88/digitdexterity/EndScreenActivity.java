@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -65,6 +66,9 @@ public class EndScreenActivity extends Activity
 		HighScore.setBackgroundColor(Color.BLACK);
 		HighScore.setText("High Scores: \n\n1st:    " + shar.getString(first, "00:00.0") + "\n2nd:   "+ shar.getString(second, "00:00.0") + "\n3rd:    "+ shar.getString(third, "00:00.0"));
 		HighScore.setTypeface(null, Typeface.BOLD);
+		
+		MediaPlayer mp = MediaPlayer.create(DigitDexterityActivity.this, R.raw.tada);  
+		mp.start();
 	}
 
 	@Override
@@ -134,12 +138,14 @@ public class EndScreenActivity extends Activity
 			{
 				Intent myIntent = new Intent(view.getContext(), CountdownActivity.class);
 				startActivityForResult(myIntent, 0);
+				finish();
 			}
 			else
 			{
 				Toast.makeText(EndScreenActivity.this, "It's Digit Time!", Toast.LENGTH_SHORT).show();
 				Intent myIntent = new Intent(getApplicationContext(), DigitDexterityActivity.class);
 				startActivityForResult(myIntent, 0);
+				finish();
 			}
 		}
 
@@ -147,6 +153,7 @@ public class EndScreenActivity extends Activity
 		{
 			Intent myIntent = new Intent(view.getContext(), MenuActivity.class);
 			startActivityForResult(myIntent, 0);
+			finish();
 		}
 	}
 }
