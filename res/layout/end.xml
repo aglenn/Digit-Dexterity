@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:background="@drawable/background"
+    android:id="@+id/endLL"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="vertical">    	
+    	<ImageView
+    		android:id="@+id/win"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/win"/>
+        <TextView
+    	android:id="@+id/ftime"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Final Time: "/>
+        <TextView
+    	android:id="@+id/spaces"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="\t"/>
+        <TextView
+    	android:id="@+id/hscore"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="HighScores"/>
+        <TextView
+    	android:id="@+id/spaces"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="\t"/>
+	    <Button
+	    	android:id="@+id/retry"
+	    	android:onClick="onClick"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Retry"
+	        android:layout_gravity="center_horizontal"/>
+	    <Button
+	    	android:id="@+id/newnumber"
+	    	android:onClick="onClick"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Pick a New Number of Buttons"
+	        android:layout_gravity="center_horizontal"/>
+</LinearLayout>

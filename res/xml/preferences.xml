@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        <PreferenceCategory
+                android:title="General Settings">
+                <CheckBoxPreference
+                        android:title="Randomize on Failure"
+                        android:defaultValue="false"
+                        android:summary="Enables the hardcore fail mode. The buttons will be randomized if pressed out of order."
+                        android:key="xrandom" />                   
+                <CheckBoxPreference
+                        android:title="Countdown"
+                        android:defaultValue="true"
+                        android:summary="Enables a countdown before the game starts"
+                        android:key="countdown" />        
+        </PreferenceCategory>
+        <PreferenceCategory
+                android:title="Game Settings">
+                <CheckBoxPreference
+                        android:title="Reverse Mode"
+                        android:defaultValue="false"
+                        android:summary="Enables reverse mode (High to Low)"
+                        android:key="reverse" />   
+                <CheckBoxPreference
+                        android:title="Roman Numerals"
+                        android:defaultValue="false"
+                        android:summary="Enables Roman Numeral Mode for all number configurations"
+                        android:key="roman" />            
+        </PreferenceCategory>        
+</PreferenceScreen>

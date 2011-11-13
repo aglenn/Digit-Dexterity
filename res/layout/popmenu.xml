@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/howto"
+          android:icon="@drawable/help"
+          android:title="How to Play" />
+    <item android:id="@+id/about"
+          android:icon="@drawable/details"
+          android:title="About" />
+    <item android:id="@+id/preferences"
+          android:icon="@drawable/preferences"
+          android:title="Preferences" />
+    <item android:id="@+id/hscores"
+          android:icon="@drawable/list"
+          android:title="High Scores" />
+</menu>

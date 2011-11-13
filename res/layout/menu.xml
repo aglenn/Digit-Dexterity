@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android" 
+	android:background="@drawable/background"
+    android:id="@+id/LL"
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    weight="2">    	
+    	<ImageView
+    		android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/title"/>
+        <TextView
+    		android:id="@+id/numbut"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Number of Buttons: "/>
+    	 <Spinner 
+        android:id="@+id/spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+	    <Button
+	    	android:id="@+id/go"
+	    	android:onClick="onClick"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="Go!"
+	        android:layout_gravity="center_horizontal"/>
+	    <TextView
+    		android:id="@+id/sp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_gravity="center_horizontal"
+        android:text="\n\n\n"/>
+
+	    
+</LinearLayout>
