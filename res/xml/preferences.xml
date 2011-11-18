@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
         <PreferenceCategory
-                android:title="General Settings">
-                <CheckBoxPreference
-                        android:title="Randomize on Failure"
-                        android:defaultValue="false"
-                        android:summary="Enables the hardcore fail mode. The buttons will be randomized if pressed out of order."
-                        android:key="xrandom" />                   
+                android:title="General Settings">              
                 <CheckBoxPreference
                         android:title="Countdown"
-                        android:defaultValue="true"
+                        android:defaultValue="false"
                         android:summary="Enables a countdown before the game starts"
                         android:key="countdown" />        
         </PreferenceCategory>
         <PreferenceCategory
                 android:title="Game Settings">
                 <CheckBoxPreference
+                        android:title="Randomize on Failure"
+                        android:defaultValue="false"
+                        android:summary="Enables the hardcore fail mode. The buttons will be randomized if pressed out of order."
+                        android:key="xrandom" />     
+                <CheckBoxPreference
                         android:title="Reverse Mode"
                         android:defaultValue="false"
                         android:summary="Enables reverse mode (High to Low)"
-                        android:key="reverse" />   
+                        android:key="reverse" />
+				<ListPreference
+                        android:title="Multiples Selection"
+                        android:summary="Count by 1, 2, 3, or 5"
+                        android:key="multiples"
+                        android:defaultValue="1x"
+                        android:entries="@array/multiples"
+                        android:entryValues="@array/multiples_values" />
                 <CheckBoxPreference
                         android:title="Roman Numerals"
                         android:defaultValue="false"

@@ -42,7 +42,7 @@ public class DigitDexterityActivity extends Activity
 	Runnable mUpdateTimeTask;
 	Timer myTimer;
 	SharedPreferences s;
-	String first,second,third, highloc, tempstring;
+	String first,second,third, highloc, tempstring, spinnerarray[];
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -65,7 +65,7 @@ public class DigitDexterityActivity extends Activity
 		min = sec = mil = 0;
 		
 		GridView gridview = (GridView) findViewById(R.id.gridview);
-
+		
 		buttonadapt = new ButtonAdapter(this);
 		butenable = new int[MenuActivity.count];
 		time = (TextView) findViewById(R.id.time);
@@ -91,6 +91,19 @@ public class DigitDexterityActivity extends Activity
 			third += "_roman";
 			highloc += "_roman";
 		}
+		
+		spinnerarray = new String[4];
+		spinnerarray[0] = "1x";
+		spinnerarray[1] = "2x";
+		spinnerarray[2] = "3x";
+		spinnerarray[3] = "5x";
+		
+		first += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
+		second += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
+		third += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
+		highloc += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
+		
+		Toast.makeText(DigitDexterityActivity.this, first, Toast.LENGTH_LONG).show();
 		
 		if(MenuActivity.count == 9)
 		{

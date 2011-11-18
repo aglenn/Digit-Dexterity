@@ -22,7 +22,7 @@ public class EndScreenActivity extends Activity
 
 	TextView FinalTime,HighScore; 
 	String text;
-	String first,second,third, highloc;
+	String first,second,third, highloc, spinnerarray[];
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -53,6 +53,17 @@ public class EndScreenActivity extends Activity
 			highloc += "_roman";
 		}
 		
+		spinnerarray = new String[4];
+		spinnerarray[0] = "1x";
+		spinnerarray[1] = "2x";
+		spinnerarray[2] = "3x";
+		spinnerarray[3] = "5x";
+		
+		first += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
+		second += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
+		third += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
+		highloc += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
+		Toast.makeText(EndScreenActivity.this, first, Toast.LENGTH_LONG).show();
 		FinalTime = (TextView) findViewById(R.id.ftime);
 		
 		HighScore = (TextView) findViewById(R.id.hscore);
@@ -67,7 +78,7 @@ public class EndScreenActivity extends Activity
 		HighScore.setText("High Scores: \n\n1st:    " + shar.getString(first, "00:00.0") + "\n2nd:   "+ shar.getString(second, "00:00.0") + "\n3rd:    "+ shar.getString(third, "00:00.0"));
 		HighScore.setTypeface(null, Typeface.BOLD);
 		
-		MediaPlayer mp = MediaPlayer.create(DigitDexterityActivity.this, R.raw.tada);  
+		MediaPlayer mp = MediaPlayer.create(EndScreenActivity.this, R.raw.tada);  
 		mp.start();
 	}
 

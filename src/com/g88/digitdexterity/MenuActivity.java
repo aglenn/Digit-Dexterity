@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,6 +45,7 @@ public class MenuActivity extends Activity
 		
 		Go = (Button) findViewById(R.id.go);
 		spinner = (Spinner) findViewById(R.id.spinner);
+
 		numbut = (TextView) findViewById(R.id.numbut);
 		numbut.setBackgroundColor(Color.BLACK);
 		numbut.setTypeface(null, Typeface.BOLD);

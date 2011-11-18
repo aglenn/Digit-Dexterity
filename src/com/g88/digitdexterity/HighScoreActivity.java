@@ -9,17 +9,29 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class HighScoreActivity extends Activity
 {
 	/** Called when the activity is first created. */
-	TextView hsview;
+	TextView hsview, hstitle;
 	String first,second,third, highloc, temptext;
 	SharedPreferences s;
 	int j[];
 	int i;
+	Spinner spinner;
+	CheckBox reverse;
+	CheckBox roman;
+	Button submit;
+	String spinnerarray[];
+	ArrayAdapter<String> adapter;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -33,84 +45,46 @@ public class HighScoreActivity extends Activity
 		j[3] = 64;
 		j[4] = 96;
 		
+		spinner = (Spinner) findViewById(R.id.spinner);
+		reverse = (CheckBox) findViewById(R.id.reverse);
+		roman = (CheckBox) findViewById(R.id.roman);
+		submit = (Button) findViewById(R.id.submit);
+		
+		spinnerarray = new String[4];
+		spinnerarray[0] = "1x";
+		spinnerarray[1] = "2x";
+		spinnerarray[2] = "3x";
+		spinnerarray[3] = "5x";
+
+		adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, spinnerarray);
+
+		spinner.setAdapter(adapter);
 		
 		hsview = (TextView) findViewById(R.id.hstext);
+		hstitle = (TextView) findViewById(R.id.hstitle);
+
+		
+		hstitle.setText("\nRegular " + spinnerarray[spinner.getSelectedItemPosition()]);
+		hsview.setText("");
 		for(i=0;i<5;i++)
 		{
-			temptext = (String) hsview.getText();
+			temptext = hsview.getText().toString();
 			first = Integer.toString(j[i]) + "_1st";
 			second = Integer.toString(j[i]) + "_2nd";
 			third = Integer.toString(j[i]) + "_3rd";
 			highloc = Integer.toString(j[i]) + "_highs";	
 		
-			s = this.getSharedPreferences(highloc, MODE_WORLD_READABLE);
-		
-			hsview.setText(temptext + "\n\n" + Integer.toString(j[i]) + " Buttons: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9"));
-	
-		}
-		
-		for(i=0;i<5;i++)
-		{
-			temptext = (String) hsview.getText();
-			first = Integer.toString(j[i]) + "_1st";
-			second = Integer.toString(j[i]) + "_2nd";
-			third = Integer.toString(j[i]) + "_3rd";
-			highloc = Integer.toString(j[i]) + "_highs";	
-			
-			first += "_r";
-			second += "_r";
-			third += "_r";
-			highloc += "_r";
-		
-			s = this.getSharedPreferences(highloc, MODE_WORLD_READABLE);
-		
-			hsview.setText(temptext + "\n\n" + Integer.toString(j[i]) + " Buttons Reversed: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9"));
-	
-		}
-		
-		//ROMAN
-		for(i=0;i<5;i++)
-		{
-			temptext = (String) hsview.getText();
-			first = Integer.toString(j[i]) + "_1st";
-			second = Integer.toString(j[i]) + "_2nd";
-			third = Integer.toString(j[i]) + "_3rd";
-			highloc = Integer.toString(j[i]) + "_highs";	
-			
-			first += "_roman";
-			second += "_roman";
-			third += "_roman";
-			highloc += "_roman";
-		
-			s = this.getSharedPreferences(highloc, MODE_WORLD_READABLE);
-		
-			hsview.setText(temptext + "\n\n" + Integer.toString(j[i]) + " Roman Buttons: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9"));
-	
-		}
-		
-		for(i=0;i<5;i++)
-		{
-			temptext = (String) hsview.getText();
-			first = Integer.toString(j[i]) + "_1st";
-			second = Integer.toString(j[i]) + "_2nd";
-			third = Integer.toString(j[i]) + "_3rd";
-			highloc = Integer.toString(j[i]) + "_highs";	
-			
-			first += "_r";
-			second += "_r";
-			third += "_r";
-			highloc += "_r";
-		
-			first += "_roman";
-			second += "_roman";
-			third += "_roman";
-			highloc += "_roman";
+			first += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+			second += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+			third += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+			highloc += "_" + spinnerarray[spinner.getSelectedItemPosition()];
 			
 			s = this.getSharedPreferences(highloc, MODE_WORLD_READABLE);
 		
-			hsview.setText(temptext + "\n\n" + Integer.toString(j[i]) + " Roman Buttons Reversed: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9"));
+			hsview.setText(temptext + "\n" + Integer.toString(j[i]) + " Buttons: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9") + "\n");
 	
 		}
+		Toast.makeText(HighScoreActivity.this, first, Toast.LENGTH_LONG).show();
 	}
 	
 	@Override
@@ -141,6 +115,130 @@ public class HighScoreActivity extends Activity
 	    default:
 	        return super.onOptionsItemSelected(item);
 	    }
+	}
+	
+	public void onClick(View view)
+	{
+		if (view.getId() == R.id.submit)
+		{
+			Toast.makeText(HighScoreActivity.this, "Submit pressed, Spinner Position: " + Integer.toString(spinner.getSelectedItemPosition()), Toast.LENGTH_SHORT).show();
+			if(reverse.isChecked() && !roman.isChecked())
+	        {
+	        	//REVERSED
+				hstitle.setText("\nReversed " + spinnerarray[spinner.getSelectedItemPosition()]);
+				hsview.setText("");
+	        	for(i=0;i<5;i++)
+	    		{
+	        		temptext = hsview.getText().toString();
+	    			first = Integer.toString(j[i]) + "_1st";
+	    			second = Integer.toString(j[i]) + "_2nd";
+	    			third = Integer.toString(j[i]) + "_3rd";
+	    			highloc = Integer.toString(j[i]) + "_highs";	
+	    			
+	    			first += "_r";
+	    			second += "_r";
+	    			third += "_r";
+	    			highloc += "_r";
+	    			
+	    			first += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			second += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			third += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			highloc += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    		
+	    			s = this.getSharedPreferences(highloc, MODE_WORLD_READABLE);
+	    		
+	    			hsview.setText(temptext + "\n" + Integer.toString(j[i]) + " Buttons: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9") + "\n");
+	    	
+	    		}
+	        }
+	        else if(!reverse.isChecked() && roman.isChecked())
+	        {
+	        	//ROMAN
+	        	hstitle.setText("\nRoman " + spinnerarray[spinner.getSelectedItemPosition()]);
+	        	hsview.setText("");
+	    		for(i=0;i<5;i++)
+	    		{
+	    			temptext = hsview.getText().toString();
+	    			first = Integer.toString(j[i]) + "_1st";
+	    			second = Integer.toString(j[i]) + "_2nd";
+	    			third = Integer.toString(j[i]) + "_3rd";
+	    			highloc = Integer.toString(j[i]) + "_highs";	
+	    			
+	    			first += "_roman";
+	    			second += "_roman";
+	    			third += "_roman";
+	    			highloc += "_roman";
+	    			
+	    			first += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			second += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			third += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			highloc += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    		
+	    			s = this.getSharedPreferences(highloc, MODE_WORLD_READABLE);
+	    		
+	    			hsview.setText(temptext +  "\n" + Integer.toString(j[i]) + " Buttons: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9") + "\n");
+	    	
+	    		}
+	        }
+	        else if(reverse.isChecked() && roman.isChecked())
+	        {
+	        	//REVERSED ROMAN
+	        	hstitle.setText("\nReversed Roman " + spinnerarray[spinner.getSelectedItemPosition()]);
+	        	hsview.setText("");
+	        	for(i=0;i<5;i++)
+	    		{
+	        		temptext = hsview.getText().toString();
+	    			first = Integer.toString(j[i]) + "_1st";
+	    			second = Integer.toString(j[i]) + "_2nd";
+	    			third = Integer.toString(j[i]) + "_3rd";
+	    			highloc = Integer.toString(j[i]) + "_highs";	
+	    			
+	    			first += "_r";
+	    			second += "_r";
+	    			third += "_r";
+	    			highloc += "_r";
+	    		
+	    			first += "_roman";
+	    			second += "_roman";
+	    			third += "_roman";
+	    			highloc += "_roman";
+	    			
+	    			first += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			second += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			third += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			highloc += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			
+	    			s = this.getSharedPreferences(highloc, MODE_WORLD_READABLE);
+	    		
+	    			hsview.setText(temptext + "\n" + Integer.toString(j[i]) + " Buttons: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9") + "\n");
+	    		
+	    		}
+	        }
+	        else
+	        {
+	        	//REGULAR
+	        	hstitle.setText("\nRegular " + spinnerarray[spinner.getSelectedItemPosition()]);
+	        	hsview.setText("");
+	    		for(i=0;i<5;i++)
+	    		{
+	    			temptext = hsview.getText().toString();
+	    			first = Integer.toString(j[i]) + "_1st";
+	    			second = Integer.toString(j[i]) + "_2nd";
+	    			third = Integer.toString(j[i]) + "_3rd";
+	    			highloc = Integer.toString(j[i]) + "_highs";	
+	    			
+	    			first += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			second += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			third += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    			highloc += "_" + spinnerarray[spinner.getSelectedItemPosition()];
+	    		
+	    			s = this.getSharedPreferences(highloc, MODE_WORLD_READABLE);
+	    		
+	    			hsview.setText(temptext + "\n" + Integer.toString(j[i]) + " Buttons: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9") + "\n");
+	    	
+	    		}
+	        }
+		}
 	}
 
 	private void showHighs()
