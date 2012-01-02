@@ -6,7 +6,12 @@
                         android:title="Countdown"
                         android:defaultValue="false"
                         android:summary="Enables a countdown before the game starts"
-                        android:key="countdown" />        
+                        android:key="countdown" />
+                <CheckBoxPreference
+                        android:title="Sound"
+                        android:defaultValue="true"
+                        android:summary="Enables sounds in the game"
+                        android:key="sound" />        
         </PreferenceCategory>
         <PreferenceCategory
                 android:title="Game Settings">
@@ -24,7 +29,7 @@
                         android:title="Multiples Selection"
                         android:summary="Count by 1, 2, 3, or 5"
                         android:key="multiples"
-                        android:defaultValue="1x"
+                        android:defaultValue="0x"
                         android:entries="@array/multiples"
                         android:entryValues="@array/multiples_values" />
                 <CheckBoxPreference

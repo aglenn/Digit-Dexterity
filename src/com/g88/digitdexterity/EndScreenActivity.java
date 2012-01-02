@@ -2,19 +2,19 @@ package com.g88.digitdexterity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class EndScreenActivity extends Activity
 {
@@ -63,7 +63,7 @@ public class EndScreenActivity extends Activity
 		second += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
 		third += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
 		highloc += "_" + spinnerarray[((int)Preference.getMultiples(getApplicationContext()).charAt(0)) - 48];
-		Toast.makeText(EndScreenActivity.this, first, Toast.LENGTH_LONG).show();
+
 		FinalTime = (TextView) findViewById(R.id.ftime);
 		
 		HighScore = (TextView) findViewById(R.id.hscore);
@@ -77,9 +77,6 @@ public class EndScreenActivity extends Activity
 		HighScore.setBackgroundColor(Color.BLACK);
 		HighScore.setText("High Scores: \n\n1st:    " + shar.getString(first, "00:00.0") + "\n2nd:   "+ shar.getString(second, "00:00.0") + "\n3rd:    "+ shar.getString(third, "00:00.0"));
 		HighScore.setTypeface(null, Typeface.BOLD);
-		
-		MediaPlayer mp = MediaPlayer.create(EndScreenActivity.this, R.raw.tada);  
-		mp.start();
 	}
 
 	@Override
@@ -145,6 +142,7 @@ public class EndScreenActivity extends Activity
 		//
 		if (view.getId() == R.id.retry)
 		{
+			MenuActivity.LockedOrientation = this.getResources().getConfiguration().orientation;
 			if(Preference.getCountdown(getApplicationContext()))
 			{
 				Intent myIntent = new Intent(view.getContext(), CountdownActivity.class);
@@ -153,7 +151,6 @@ public class EndScreenActivity extends Activity
 			}
 			else
 			{
-				Toast.makeText(EndScreenActivity.this, "It's Digit Time!", Toast.LENGTH_SHORT).show();
 				Intent myIntent = new Intent(getApplicationContext(), DigitDexterityActivity.class);
 				startActivityForResult(myIntent, 0);
 				finish();
@@ -166,5 +163,45 @@ public class EndScreenActivity extends Activity
 			startActivityForResult(myIntent, 0);
 			finish();
 		}
+	}
+	
+	@Override
+    protected void onPause() {
+        super.onPause();
+    }
+	
+	@Override
+    protected void onResume() {
+        super.onResume();
+    }
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    //Handle the back button
+	    if(keyCode == KeyEvent.KEYCODE_BACK) {
+	        //Ask the user if they want to quit
+	        new AlertDialog.Builder(this)
+	        .setIcon(android.R.drawable.ic_dialog_alert)
+	        .setTitle("Exit Digit Dexterity?")
+	        .setMessage("I get it, you've had too much fun...")
+	        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+	            @Override
+	            public void onClick(DialogInterface dialog, int which) {
+
+	                //Stop the activity
+	                EndScreenActivity.this.finish();    
+	            }
+
+	        })
+	        .setNegativeButton("No", null)
+	        .show();
+
+	        return true;
+	    }
+	    else {
+	        return super.onKeyDown(keyCode, event);
+	    }
+
 	}
 }

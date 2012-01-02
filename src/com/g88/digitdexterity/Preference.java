@@ -33,6 +33,13 @@ public class Preference extends PreferenceActivity
 		
 	}
 	
+	public static boolean getSound(Context appContext) {
+		//get Sound value
+		SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
+		return app_preferences.getBoolean("sound", true);	
+		
+	}
+	
 	public static boolean getCountdown(Context appContext) {
 		//get countdown value
 		SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
@@ -42,7 +49,7 @@ public class Preference extends PreferenceActivity
 	public static String getMultiples(Context appContext) {
 		//get Multiples value		
 		SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(appContext);
-		return app_preferences.getString("multiples", "0");
+		return app_preferences.getString("multiples", "0x");
 	}
 	
 	public static boolean getRoman(Context appContext) {

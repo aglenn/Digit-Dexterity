@@ -84,7 +84,6 @@ public class HighScoreActivity extends Activity
 			hsview.setText(temptext + "\n" + Integer.toString(j[i]) + " Buttons: \n1st:    " + s.getString(first, "99:99.9") + "\n2nd:   "+ s.getString(second, "99:99.9") + "\n3rd:    "+ s.getString(third, "99:99.9") + "\n");
 	
 		}
-		Toast.makeText(HighScoreActivity.this, first, Toast.LENGTH_LONG).show();
 	}
 	
 	@Override
@@ -121,7 +120,6 @@ public class HighScoreActivity extends Activity
 	{
 		if (view.getId() == R.id.submit)
 		{
-			Toast.makeText(HighScoreActivity.this, "Submit pressed, Spinner Position: " + Integer.toString(spinner.getSelectedItemPosition()), Toast.LENGTH_SHORT).show();
 			if(reverse.isChecked() && !roman.isChecked())
 	        {
 	        	//REVERSED
@@ -244,49 +242,57 @@ public class HighScoreActivity extends Activity
 	private void showHighs()
 	{
 		//clear the high scores
+
+		int k;
 		SharedPreferences shar;
-		for(i=0;i<5;i++)
+		for(k=0;k<4;k++)
 		{
-			highloc = Integer.toString(j[i]) + "_highs";	
-			shar = HighScoreActivity.this.getSharedPreferences(highloc, MODE_PRIVATE);
-			Editor edit = shar.edit();
-			edit.clear();
-			edit.commit();
-		}
+			for(i=0;i<5;i++)
+			{
+				highloc = Integer.toString(j[i]) + "_highs";	
+				highloc += "_" + spinnerarray[k];
+				shar = HighScoreActivity.this.getSharedPreferences(highloc, MODE_PRIVATE);
+				Editor edit = shar.edit();
+				edit.clear();
+				edit.commit();
+			}
 		
-		for(i=0;i<5;i++)
-		{		
-			highloc = Integer.toString(j[i]) + "_highs";	
-			highloc += "_r";
-			shar = HighScoreActivity.this.getSharedPreferences(highloc, MODE_PRIVATE);
-			Editor edit = shar.edit();
-			edit.clear();
-			edit.commit();
-		}
+			for(i=0;i<5;i++)
+			{		
+				highloc = Integer.toString(j[i]) + "_highs";	
+				highloc += "_r";
+				highloc += "_" + spinnerarray[k];
+				shar = HighScoreActivity.this.getSharedPreferences(highloc, MODE_PRIVATE);
+				Editor edit = shar.edit();
+				edit.clear();
+				edit.commit();
+			}
 		
-		//ROMAN
-		for(i=0;i<5;i++)
-		{
-			highloc = Integer.toString(j[i]) + "_highs";				
-			highloc += "_roman";
-			shar = HighScoreActivity.this.getSharedPreferences(highloc, MODE_PRIVATE);
-			Editor edit = shar.edit();
-			edit.clear();
-			edit.commit();		
+			//ROMAN
+			for(i=0;i<5;i++)
+			{
+				highloc = Integer.toString(j[i]) + "_highs";				
+				highloc += "_roman";
+				highloc += "_" + spinnerarray[k];
+				shar = HighScoreActivity.this.getSharedPreferences(highloc, MODE_PRIVATE);
+				Editor edit = shar.edit();
+				edit.clear();
+				edit.commit();		
 	
-		}
+			}
 		
-		for(i=0;i<5;i++)
-		{
-			highloc = Integer.toString(j[i]) + "_highs";				
-			highloc += "_r";
-			highloc += "_roman";
-			shar = HighScoreActivity.this.getSharedPreferences(highloc, MODE_PRIVATE);
-			Editor edit = shar.edit();
-			edit.clear();
-			edit.commit();	
+			for(i=0;i<5;i++)
+			{
+				highloc = Integer.toString(j[i]) + "_highs";				
+				highloc += "_r";
+				highloc += "_roman";
+				highloc += "_" + spinnerarray[k];
+				shar = HighScoreActivity.this.getSharedPreferences(highloc, MODE_PRIVATE);
+				Editor edit = shar.edit();
+				edit.clear();
+				edit.commit();	
+			}
 		}
-		
 		Toast.makeText(HighScoreActivity.this, "High Scores Cleared!", Toast.LENGTH_SHORT).show();
 		Intent myIntent = new Intent(getApplicationContext(), HighScoreActivity.class);
 		startActivityForResult(myIntent, 0);
