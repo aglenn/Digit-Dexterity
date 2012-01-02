@@ -45,6 +45,15 @@ public class ButtonAdapter extends BaseAdapter
 	{
 		// ImageView imageView;
 		Button tempBut;
+		int multiple;
+		String spinnerarray[];
+		
+		spinnerarray = new String[4];
+		spinnerarray[0] = "1x";
+		spinnerarray[1] = "2x";
+		spinnerarray[2] = "3x";
+		spinnerarray[3] = "5x";
+		
 		if (convertView == null)
 		{ // if it's not recycled, initialize some attributes
 			tempBut = new Button(mContext);
@@ -57,7 +66,8 @@ public class ButtonAdapter extends BaseAdapter
 			tempBut = (Button) convertView;
 		}
 
-		tempBut.setId(1000 + DigitDexterityActivity.location[position]);////
+		tempBut.setId(1000 + DigitDexterityActivity.location[position]);
+		multiple = spinnerarray[((int)Preference.getMultiples(mContext).charAt(0)) - 48].charAt(0) - 48;
 		if (DigitDexterityActivity.butenable[DigitDexterityActivity.location[position]] == 0)
 		{
 			tempBut.setEnabled(false);
@@ -68,11 +78,11 @@ public class ButtonAdapter extends BaseAdapter
 		}
 		if(Preference.getRoman(mContext))
 		{
-			tempBut.setText(DigitDexterityActivity.location_s[position]);
+			tempBut.setText(DigitDexterityActivity.romans[(DigitDexterityActivity.location[position] + 1) * multiple]);
 		}
 		else
 		{
-			tempBut.setText(Integer.toString(DigitDexterityActivity.location[position] + 1));
+			tempBut.setText(Integer.toString((DigitDexterityActivity.location[position] + 1) * multiple));
 		}	
 		tempBut.setTypeface(null, Typeface.BOLD);
 		tempBut.setTextSize(20);

@@ -9,8 +9,8 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class CountdownActivity extends Activity
 {
@@ -18,12 +18,19 @@ public class CountdownActivity extends Activity
 	Timer myTimer;
 	ImageView imview;
 	int sec;
+	
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+		
+		if(MenuActivity.LockedOrientation == 1) this.setRequestedOrientation(1); // Portrait
+		else this.setRequestedOrientation(0); // Landscape
+		
 		setContentView(R.layout.countdown);
+		
+		this.setVolumeControlStream(AudioManager.STREAM_MUSIC); 
 		sec = 4;
 		
 		imview = (ImageView) findViewById(R.id.imview);
@@ -53,6 +60,24 @@ public class CountdownActivity extends Activity
 		}, 0, 1000);
     }
 	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+	{
+		// Handle the back button
+		if (keyCode == KeyEvent.KEYCODE_BACK)
+		{
+			Intent myIntent = new Intent(getApplicationContext(), MenuActivity.class);
+			startActivityForResult(myIntent, 0);
+			finish();
+			return true;
+		}
+		else
+		{
+			return super.onKeyDown(keyCode, event);
+		}
+
+	}
+	
 	protected void TimerMethod()
 	{
 		this.runOnUiThread(Timer_Tick);
@@ -69,28 +94,27 @@ public class CountdownActivity extends Activity
 			{
 				imview.setImageResource(R.drawable.three);
 				MediaPlayer mp = MediaPlayer.create(CountdownActivity.this, R.raw.low);  
-				mp.start();
+				if(Preference.getSound(getApplicationContext())) mp.start();
 			}
 			else if(sec == 2)
 			{
 				imview.setImageResource(R.drawable.two);
 				MediaPlayer mp = MediaPlayer.create(CountdownActivity.this, R.raw.low);  
-				mp.start();
+				if(Preference.getSound(getApplicationContext())) mp.start();
 			}
 			else if(sec ==1)
 			{
 				imview.setImageResource(R.drawable.one);
 				MediaPlayer mp = MediaPlayer.create(CountdownActivity.this, R.raw.low);  
-				mp.start();
+				if(Preference.getSound(getApplicationContext())) mp.start();
 			}
 			else
 			{			
 				myTimer.cancel();
-				Toast.makeText(CountdownActivity.this, "It's Digit Time!", Toast.LENGTH_SHORT).show();
 				Intent myIntent = new Intent(getApplicationContext(), DigitDexterityActivity.class);
 				startActivityForResult(myIntent, 0);
 				MediaPlayer mp = MediaPlayer.create(CountdownActivity.this, R.raw.high);  
-				mp.start();
+				if(Preference.getSound(getApplicationContext())) mp.start();
 				finish();
 			}
 		}

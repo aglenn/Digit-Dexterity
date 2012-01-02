@@ -39,15 +39,17 @@
 	    <Button
 	    	android:id="@+id/retry"
 	    	android:onClick="onClick"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:text="Retry"
-	        android:layout_gravity="center_horizontal"/>
+	        android:layout_gravity="center_horizontal"
+	        android:textSize="20dp"/>
 	    <Button
 	    	android:id="@+id/newnumber"
 	    	android:onClick="onClick"
-	        android:layout_width="wrap_content"
+	        android:layout_width="fill_parent"
 	        android:layout_height="wrap_content"
 	        android:text="Pick a New Number of Buttons"
-	        android:layout_gravity="center_horizontal"/>
+	        android:layout_gravity="center_horizontal"
+	        android:textSize="20dp"/>
 </LinearLayout>

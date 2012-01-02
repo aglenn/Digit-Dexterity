@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="howtoplayreverse">Start by pressing the highest number. Then keep counting down till you reach #1! Be careful though, if you mess up you\'ll go back to the beginning!</string>
-    <string name="howtoplay">Start by pressing button #1. Then keep counting up till you reach the end! Be careful though, if you mess up you\'ll go back to the beginning!</string>
-    <string name="howtoplayromanreverse">Start by pressing the highest number in Roman numerals. Then keep counting down till you reach I! Be careful though, if you mess up you\'ll go back to the beginning!</string>
-    <string name="howtoplayroman">Start by pressing button I. Then keep counting up till you reach the end! Be careful though, if you mess up you\'ll go back to the beginning!</string>
-    <string name="about">Digit Dexterity v0.5\nWritten by Alexander Glenn\n6/21/2011</string>
+    <string name="howtoplayreverse">Start by pressing the highest number. Then keep counting down till you reach the lowest! Be careful though, if you mess up you\'ll go back to the beginning!</string>
+    <string name="howtoplay">Start by pressing the lowest number. Then keep counting up till you reach the end! Be careful though, if you mess up you\'ll go back to the beginning!</string>
+    <string name="about">Digit Dexterity v0.6\nWritten by Alexander Glenn\n1/1/2012\n\nView source online:\n http://github.com/aglenn/Digit-Dexterity</string>
     <string name="app_name">Digit Dexterity</string>
 </resources>
