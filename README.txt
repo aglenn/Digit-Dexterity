@@ -69,3 +69,13 @@ Option to view all high scores
 Victory sound has been added. (works on media volume)
 	
 All new options are changeable in preferences.
+
+** Version 0.6 **
+1/1/2012
+
+Improved high score screen
+Muliples modes (count by 2s, 3s, 5s)
+Landscape, tablet, and small screen support
+Ad free and open source (https://github.com/aglenn/Digit-Dexterity)
+Sound toggle
+Bug fixes
